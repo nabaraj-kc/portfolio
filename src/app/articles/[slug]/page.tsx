@@ -74,8 +74,39 @@ export default async function ArticleDetailPage({ params }: PageProps) {
     ? article.content.split("\n\n").filter(Boolean)
     : [];
 
+  const jsonLdArticle = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": shortenTitle(article.title),
+    "description": article.excerpt,
+    "author": {
+      "@type": "Person",
+      "name": article.author || "Nabaraj KC",
+      "url": "https://nabarajkc.com.np",
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Nabaraj KC",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://nabarajkc.com.np/images/logo-cropped.png",
+      },
+    },
+    "datePublished": article.publishedAt || article.createdAt || article.date,
+    "dateModified": article.publishedAt || article.createdAt || article.date,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://articles.nabarajkc.com.np/${article.slug}`,
+    },
+    "keywords": article.keywords || [article.tag, "Nabaraj KC", "AI", "Software Engineering"],
+  };
+
   return (
     <div className="min-h-screen bg-[#F5F1E8] text-[#202020] flex flex-col font-sans">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArticle) }}
+      />
       <Nav />
 
       <main className="flex-grow pt-32 pb-24 md:pt-40 md:pb-32">

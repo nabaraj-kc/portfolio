@@ -121,8 +121,35 @@ export default async function ResearchDetailPage({ params }: PageProps) {
 
   const displayTitle = shortenTitle(paper.title);
 
+  const jsonLdScholarly = {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": shortenTitle(paper.title),
+    "description": paper.abstract || paper.content?.slice(0, 160),
+    "author": {
+      "@type": "Person",
+      "name": paper.author || "Nabaraj KC",
+      "url": "https://nabarajkc.com.np",
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Krrishmay AI Labs",
+      "url": "https://research.nabarajkc.com.np",
+    },
+    "datePublished": paper.publishedAt || paper.createdAt || paper.year,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://research.nabarajkc.com.np/${paper.id}`,
+    },
+    "keywords": paper.tags || ["AI Research", "Machine Learning", "Nabaraj KC"],
+  };
+
   return (
     <div className="min-h-screen bg-[#F5F1E8] text-[#202020] flex flex-col font-sans">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdScholarly) }}
+      />
       <Nav />
 
       <main className="flex-grow pt-32 pb-24 md:pt-40 md:pb-32">
