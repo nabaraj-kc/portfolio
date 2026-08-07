@@ -1,0 +1,37 @@
+{
+  "papers": [
+    {
+      "event": "audiobook_play",
+      "pageId": "edge-ai-2026-npu-breakthrough-local-silicon-powerhouses",
+      "title": "Edge AI 2026",
+      "email": "anonymous",
+      "details": {
+        "totalChunks": 25
+      },
+      "timestamp": "2026-08-07T08:40:18.769Z",
+      "_id": "1786092018771"
+    },
+    {
+      "event": "user_login_google",
+      "pageId": "unknown",
+      "title": "",
+      "email": "nabarajkc43@gmail.com",
+      "details": {
+        "username": "Kc Nabaraj"
+      },
+      "timestamp": "2026-08-06T16:45:06.147Z",
+      "_id": "1786034706151"
+    },
+    {
+      "event": "audiobook_play",
+      "pageId": "ai-business-by-2030-comprehensive-analysis",
+      "title": "AI Business by 2030: Analysis",
+      "email": "anonymous",
+      "details": {
+        "totalChunks": 72
+      },
+      "timestamp": "2026-08-03T18:53:35.657Z",
+      "_id": "1785783215658"
+    }
+  ]
+}

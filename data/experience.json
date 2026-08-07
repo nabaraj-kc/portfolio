@@ -1,0 +1,29 @@
+[
+  {
+    "id": "ai-engineer",
+    "years": "JAN 2024 – PRESENT",
+    "role": "AI Engineer & Researcher",
+    "organization": "Independent Research & Engineering",
+    "description": "Designed PyTorch recommendation models, TensorFlow document classification pipelines (95%+ accuracy), and computer vision inspection microservices. Developed the Krrishmay multi-agent architecture.",
+    "tag": "AI / ML",
+    "initials": "AI"
+  },
+  {
+    "id": "software-engineer",
+    "years": "2024 – PRESENT",
+    "role": "Full-Stack Software Engineer",
+    "organization": "Kathmandu, Nepal",
+    "description": "Architected high-throughput web applications including Happy Clinic (Next.js healthcare platform) and SpaceChat (real-time engine). Currently engineering O, a multi-agent AI operating system.",
+    "tag": "Software Eng.",
+    "initials": "SE"
+  },
+  {
+    "id": "iot-hardware",
+    "years": "2024 – 2025",
+    "role": "IoT & Hardware Integration Engineer",
+    "organization": "Systems Lab",
+    "description": "Integrated Arduino microcontrollers and sensor arrays with C++ and Node.js for real-time hardware telemetry tracking and automated device triggers.",
+    "tag": "Hardware",
+    "initials": "HW"
+  }
+]

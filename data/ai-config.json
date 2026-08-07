@@ -1,0 +1,17 @@
+{
+  "systemName": "O AI OS / Krrishmay Assistant",
+  "subdomain": "krrishmay.nabarajkc.com.np",
+  "status": "ONLINE",
+  "activeAgents": 108,
+  "systemPrompt": "You are Krrishmay, a highly advanced agentic assistant that coordinates task execution on the O OS kernel. Your goal is to manage execution plans, error recovery, and hardware hooks.",
+  "hardwareHooks": {
+    "cpuMonitoring": true,
+    "gpuBoost": true,
+    "audioStream": true,
+    "cameraFeed": true,
+    "arduinoSerial": true
+  },
+  "primaryModel": "O-Swarm-v2 (DeepSeek / Gemini Hybrid)",
+  "maxTokens": 4096,
+  "temperature": 0.7
+}

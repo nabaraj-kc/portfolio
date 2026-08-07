@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1786052895991",
+    "name": "Nabaraj kc",
+    "email": "nabarajkc43@gmail.com",
+    "phone": "+977 9761696109",
+    "message": "hey",
+    "receivedAt": "2026-08-06T21:48:15.991Z",
+    "read": false,
+    "_id": "1786052895993"
+  },
+  {
+    "id": "1784907095555",
+    "name": "Agent Test",
+    "email": "agent@test.com",
+    "phone": "",
+    "message": "This is a browser automation test message.",
+    "receivedAt": "2026-07-24T15:31:35.556Z",
+    "read": false
+  },
+  {
+    "id": "1784802704122",
+    "name": "Nabaraj kc",
+    "email": "nabarajkc43@gmail.com",
+    "phone": "+977 9761696109",
+    "message": "jhgjhvhjvjhv",
+    "receivedAt": "2026-07-23T10:31:44.122Z",
+    "read": false
+  }
+]

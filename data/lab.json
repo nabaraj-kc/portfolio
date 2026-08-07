@@ -1,0 +1,44 @@
+[
+  {
+    "id": "o-ai-os-kernel",
+    "name": "O AI OS Kernel & Hardware Hook",
+    "category": "AI Operating System",
+    "description": "Hierarchical agent dispatch kernel for O (Krrishmay Assistant). Manages multi-agent tasks, dynamic RAG context windows, Generative UI, and hardware hooks for CPU, GPU, audio, camera, and Arduino microcontrollers.",
+    "techStack": [
+      "Python",
+      "C++",
+      "PyTorch",
+      "Arduino C++"
+    ],
+    "githubUrl": "https://github.com/nabaraj-kc",
+    "snippet": "// O AI OS Hardware Controller & Multi-Agent Swarm Hook\nclass KrrishmayAgentSwarm {\npublic:\n    Status dispatch_agent_task(const TaskGoal& goal, HardwareContext& hw) {\n        auto agent_pool = swarm_allocator.spawn_agents(100);\n        hw.request_gpu_boost();\n        hw.stream_camera_audio();\n        \n        auto plan = agent_pool.synthesize_rag_plan(goal);\n        return agent_pool.execute_with_generative_ui(plan, hw);\n    }\n};"
+  },
+  {
+    "id": "cardiorisk-engine",
+    "name": "CardioRisk Inference Pipeline",
+    "category": "Machine Learning",
+    "description": "Prediction model for cardiovascular risk evaluation. Uses deep learning classification models with an interactive Streamlit interface and Docker runtime.",
+    "techStack": [
+      "Python",
+      "PyTorch",
+      "Streamlit",
+      "Docker"
+    ],
+    "githubUrl": "https://github.com/nabaraj-kc/CardioRisk_AI",
+    "snippet": "# CardioRisk AI Inference Pipeline\nimport torch\nimport torch.nn as nn\n\nclass CardiacRiskClassifier(nn.Module):\n    def __init__(self, input_dim=30):\n        super().__init__()\n        self.net = nn.Sequential(\n            nn.Linear(input_dim, 128),\n            nn.BatchNorm1d(128),\n            nn.ReLU(),\n            nn.Dropout(0.3),\n            nn.Linear(128, 64),\n            nn.ReLU(),\n            nn.Linear(64, 1),\n            nn.Sigmoid()\n        )\n    \n    def forward(self, x):\n        return self.net(x)"
+  },
+  {
+    "id": "kyc-vision-pipeline",
+    "name": "KYC Document Verification",
+    "category": "Computer Vision",
+    "description": "Document quality check pipeline using OpenCV and FastAPI microservices with a Flutter mobile app.",
+    "techStack": [
+      "FastAPI",
+      "Python",
+      "OpenCV",
+      "Flutter"
+    ],
+    "githubUrl": "https://github.com/nabaraj-kc/kyc-quality-check",
+    "snippet": "# KYC Vision Verification Microservice\nfrom fastapi import FastAPI, UploadFile\nimport cv2\nimport numpy as np\n\napp = FastAPI()\n\n@app.post(\"/verify-quality\")\nasync def check_document_clarity(file: UploadFile):\n    image_bytes = await file.read()\n    img = cv2.imdecode(np.frombuffer(image_bytes, np.uint8), cv2.IMREAD_COLOR)\n    laplacian_var = cv2.Laplacian(img, cv2.CV_64F).var()\n    \n    is_sharp = laplacian_var > 100.0\n    return {\"quality_score\": laplacian_var, \"is_valid\": is_sharp}"
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "activeModel": "gemini-2.5-flash",
+  "temperature": 0.7,
+  "maxTokens": 2048,
+  "systemPrompt": "You are Krrishmay, the primary AI intelligence layer of nabarajkc.com.np.",
+  "autoPublish": true,
+  "webSearchEnabled": true,
+  "autoPublishEnabled": true,
+  "autoPublishTime": "15:26",
+  "updatedAt": "2026-08-07T09:40:23.820Z",
+  "autoPublishLastRun": "2026-08-07T09:41:09.750Z",
+  "autoPublishLastStatus": "SUCCESS"
+}

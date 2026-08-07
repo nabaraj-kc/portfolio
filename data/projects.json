@@ -1,0 +1,52 @@
+[
+  {
+    "id": "o-ai-os",
+    "title": "O AI OS & Krrishmay Assistant",
+    "category": "AI Operating System",
+    "description": "An AI operating system built around Krrishmay, a multi-agent orchestration kernel. Coordinates a network of 100+ domain-isolated agents, uses Generative UI and RAG for task execution, and interfaces with hardware metrics (CPU/GPU, audio, camera, and Arduino microcontrollers).",
+    "tag": "Python / C++",
+    "language": "Python",
+    "href": "https://github.com/nabaraj-kc",
+    "featured": true
+  },
+  {
+    "id": "cardiorisk-ai",
+    "title": "CardioRisk AI",
+    "category": "Machine Learning",
+    "description": "A clinical decision support system for cardiac risk evaluation. Powered by PyTorch classification models with batch-normalized layers, containerized via Docker, and deployed through a Streamlit interface.",
+    "tag": "PyTorch / Docker",
+    "language": "Python",
+    "href": "https://github.com/nabaraj-kc/CardioRisk_AI",
+    "featured": true
+  },
+  {
+    "id": "kyc-quality-check",
+    "title": "KYC Quality Verification Service",
+    "category": "Computer Vision",
+    "description": "An automated identity document inspection service built with FastAPI and OpenCV. Evaluates Laplacian variance for blur detection and alignment verification, connected to a Flutter mobile application.",
+    "tag": "FastAPI / OpenCV",
+    "language": "Python",
+    "href": "https://github.com/nabaraj-kc/kyc-quality-check",
+    "featured": false
+  },
+  {
+    "id": "happy-clinic",
+    "title": "Happy Clinic Platform",
+    "category": "Web Application",
+    "description": "A comprehensive healthcare and clinic management platform built with Next.js and TypeScript. Provides patient appointment scheduling, digital medical record access, and secure authentication.",
+    "tag": "Next.js / TypeScript",
+    "language": "TypeScript",
+    "href": "https://github.com/nabaraj-kc/happy-clinic",
+    "featured": false
+  },
+  {
+    "id": "spacechat",
+    "title": "SpaceChat Engine",
+    "category": "Real-time Systems",
+    "description": "A high-concurrency real-time messaging application built with WebSockets and Node.js. Features room state synchronization, message persistence, and sub-50ms message routing.",
+    "tag": "JavaScript / WebSockets",
+    "language": "JavaScript",
+    "href": "https://github.com/nabaraj-kc/Spacechat",
+    "featured": false
+  }
+]
