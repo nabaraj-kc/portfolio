@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Modern Full-Stack AI Portfolio Site 🚀✨
 
-## Getting Started
+> **Personal Developer Portfolio & AI Engineering Showcase**  
+> *Built with Next.js 15 App Router, React, Tailwind CSS, Framer Motion, MongoDB, Firebase Admin, Gemini AI, Mistral API, Tavily Web Search, and Resume Analyzer.*
 
-First, run the development server:
+[![Next.js](https://img.shields.io/badge/Next.js-15.0-000000?style=flat&logo=next.js&logoColor=white)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19.0-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat&logo=mongodb&logoColor=white)](https://mongodb.com)
 
+---
+
+## 💡 Highlights & Features
+
+- ⚡ **Next.js 15 App Router & Server Actions**: Production performance with hybrid static rendering, server actions, and API route security.
+- 🤖 **Integrated Gemini AI Streaming Chat**: Custom AI assistant embedded into the portfolio to answer visitor questions about experience, projects, and tech stack.
+- 📄 **Smart Resume Analyzer Engine**: Evaluates resume markdown and provides algorithmic scoring based on ATS rules and software engineering guidelines.
+- 🌐 **Tavily AI Search & Scraper**: Real-time web intelligence and research integration powered by Tavily and Cheerio.
+- 🎨 **Glassmorphism & Micro-Animations**: Smooth visual transitions built with **Framer Motion** and Tailwind CSS design tokens.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Installation
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/nabaraj-kc/portfolio.git
+cd portfolio
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Environment Configuration
+```bash
+cp .env.example .env.local
+# Fill in your local MongoDB URI, Gemini API key, etc.
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Run Development Server
+```bash
+npm run dev
+# Open http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 👨‍💻 Author
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Nabaraj KC**  
+- GitHub: [@nabaraj-kc](https://github.com/nabaraj-kc)  
+- Website: [nabarajkc.com.np](https://nabarajkc.com.np)
