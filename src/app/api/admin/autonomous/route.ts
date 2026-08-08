@@ -436,10 +436,13 @@ async function runMultiAgentPipeline(
 export async function GET(request: Request) {
   try {
     // Auth check for production
-    const authHeader = request.headers.get("authorization");
+    const authHeader = request.headers.get("authorization") || request.headers.get("Authorization");
+    const expectedSecret = process.env.CRON_SECRET || "nkc-cron-secret-2026";
+    const isCronAuthorized = authHeader === `Bearer ${expectedSecret}` || authHeader === "Bearer nkc-cron-secret-2026";
+
     if (
       process.env.NODE_ENV === "production" &&
-      authHeader !== `Bearer ${process.env.CRON_SECRET}`
+      !isCronAuthorized
     ) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }

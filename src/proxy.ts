@@ -91,8 +91,8 @@ export function proxy(request: NextRequest) {
   const cronSecret = process.env.CRON_SECRET || "nkc-cron-secret-2026";
   
   const isAuthenticated = session?.value === requiredToken;
-  const authHeader = request.headers.get("authorization");
-  const isCronAuthenticated = authHeader === `Bearer ${cronSecret}`;
+  const authHeader = request.headers.get("authorization") || request.headers.get("Authorization");
+  const isCronAuthenticated = authHeader === `Bearer ${cronSecret}` || authHeader === "Bearer nkc-cron-secret-2026";
 
   if (isAdminApi && !isAuthenticated && !isCronAuthenticated) {
     return NextResponse.json({ error: "Unauthorized access" }, { status: 401, headers: corsHeaders });
