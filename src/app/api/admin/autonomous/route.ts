@@ -649,6 +649,9 @@ async function sendDailyReportEmail(article: any, research: any) {
     });
 
     const todayStr = new Date().toLocaleDateString("en-US");
+    const artSlug = article.slug || article._id?.toString() || article.id;
+    const resSlug = research.slug || research.id || research._id?.toString();
+
     const mailOptions = {
       from: `"Autonomous AI Agent" <${gmailUser}>`,
       to: "nabarajkc43@gmail.com",
@@ -664,14 +667,14 @@ async function sendDailyReportEmail(article: any, research: any) {
             <h3 style="color: #C85A17; margin-top: 0;">1. Generated Article</h3>
             <p><strong>Title:</strong> ${article.title}</p>
             <p><strong>Excerpt/Summary:</strong> ${article.excerpt || "No summary available."}</p>
-            <p><strong>Link:</strong> <a href="${baseUrl}/articles/${article.slug}" style="color: #C85A17; text-decoration: underline; font-weight: bold;">Read Article</a></p>
+            <p><strong>Link:</strong> <a href="${baseUrl}/articles/${artSlug}" style="color: #C85A17; text-decoration: underline; font-weight: bold;">Read Article</a></p>
           </div>
 
           <div style="margin-top: 25px; background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
             <h3 style="color: #4A6741; margin-top: 0;">2. Generated Research Paper</h3>
             <p><strong>Title:</strong> ${research.title}</p>
             <p><strong>Abstract/Summary:</strong> ${research.abstract || "No abstract available."}</p>
-            <p><strong>Link:</strong> <a href="${baseUrl}/research/${research.slug}" style="color: #4A6741; text-decoration: underline; font-weight: bold;">Read Research Paper</a></p>
+            <p><strong>Link:</strong> <a href="${baseUrl}/research/${resSlug}" style="color: #4A6741; text-decoration: underline; font-weight: bold;">Read Research Paper</a></p>
           </div>
 
           <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 25px 0;" />

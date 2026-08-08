@@ -30,10 +30,29 @@ export async function generateStaticParams() {
   }));
 }
 
+function findArticleBySlug(articles: any[], rawSlug: string) {
+  if (!rawSlug) return null;
+  const decoded = decodeURIComponent(rawSlug).trim().toLowerCase();
+  return articles.find((a: any) => {
+    if (!a) return false;
+    const slug = (a.slug || "").trim().toLowerCase();
+    const id = (a._id?.toString() || a.id || "").trim().toLowerCase();
+    const titleSlug = (a.title || "").toLowerCase().replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "-");
+    return (
+      slug === decoded ||
+      id === decoded ||
+      titleSlug === decoded ||
+      slug.replace(/-/g, " ") === decoded ||
+      decoded.startsWith(slug) ||
+      (slug && decoded.includes(slug))
+    );
+  }) || null;
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const articles = await getArticles();
-  const article = articles.find((a: any) => a.slug === resolvedParams.slug);
+  const article = findArticleBySlug(articles, resolvedParams.slug);
 
   if (!article) {
     return {
@@ -41,7 +60,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const url = `https://articles.nabarajkc.com.np/${article.slug}`;
+  const url = `https://articles.nabarajkc.com.np/${article.slug || resolvedParams.slug}`;
 
   return {
     title: `${article.title} | Nabaraj KC`,
@@ -63,7 +82,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ArticleDetailPage({ params }: PageProps) {
   const resolvedParams = await params;
   const articles = await getArticles();
-  const article = articles.find((a: any) => a.slug === resolvedParams.slug);
+  const article = findArticleBySlug(articles, resolvedParams.slug);
 
   if (!article) {
     notFound();

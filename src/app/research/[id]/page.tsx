@@ -23,30 +23,58 @@ interface PageProps {
   }>;
 }
 
+function findResearchById(allResearch: any[], targetId: string) {
+  if (!targetId) return null;
+  const decoded = decodeURIComponent(targetId).trim().toLowerCase();
+
+  // 1. Check nested paper lists
+  for (const item of allResearch) {
+    if (item.papers && Array.isArray(item.papers)) {
+      const found = item.papers.find((p: any) => {
+        const pid = (p.id || p.slug || p._id?.toString() || "").trim().toLowerCase();
+        return pid === decoded || decoded.includes(pid);
+      });
+      if (found) return found;
+    }
+  }
+
+  // 2. Check top-level research documents
+  const rawPaper = allResearch.find((r: any) => {
+    if (!r) return false;
+    const slug = (r.slug || "").trim().toLowerCase();
+    const id = (r._id?.toString() || r.id || "").trim().toLowerCase();
+    const titleSlug = (r.title || "").toLowerCase().replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "-");
+    return (
+      slug === decoded ||
+      id === decoded ||
+      titleSlug === decoded ||
+      slug.replace(/-/g, " ") === decoded ||
+      decoded.startsWith(slug) ||
+      (slug && decoded.includes(slug))
+    );
+  });
+
+  if (rawPaper) {
+    return {
+      id: rawPaper.slug || rawPaper._id?.toString(),
+      title: rawPaper.title,
+      conference: rawPaper.tag || "AI Research Specification",
+      year: rawPaper.formattedPublishTime || rawPaper.date || "2026",
+      abstract: rawPaper.abstract || rawPaper.excerpt || "",
+      content: rawPaper.content || rawPaper.abstract || rawPaper.excerpt || "",
+      pdfUrl: "#",
+      tags: rawPaper.keywords || [],
+      coverImage: rawPaper.coverImage
+    };
+  }
+
+  return null;
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const allResearch = await getResearch();
-  
-  const seedConfig = allResearch.find((r: any) => r.papers && r.focusAreas);
-  const papers = seedConfig?.papers || [];
-  let paper = papers.find((p: any) => p.id === resolvedParams.id);
-
-  if (!paper) {
-    const rawPaper = allResearch.find((r: any) => r.slug === resolvedParams.id || r._id?.toString() === resolvedParams.id);
-    if (rawPaper) {
-      paper = {
-        id: rawPaper.slug || rawPaper._id?.toString(),
-        title: rawPaper.title,
-        conference: rawPaper.tag || "AI Research Specification",
-        year: rawPaper.formattedPublishTime || rawPaper.date || "2026",
-        abstract: rawPaper.abstract || rawPaper.excerpt || "",
-        content: rawPaper.content || rawPaper.abstract || rawPaper.excerpt || "",
-        pdfUrl: "#",
-        tags: rawPaper.keywords || [],
-        coverImage: rawPaper.coverImage
-      };
-    }
-  }
+  const paper = findResearchById(allResearch, resolvedParams.id);
 
   if (!paper) {
     return {
@@ -63,27 +91,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ResearchDetailPage({ params }: PageProps) {
   const resolvedParams = await params;
   const allResearch = await getResearch();
-  
-  const seedConfig = allResearch.find((r: any) => r.papers && r.focusAreas);
-  const papers = seedConfig?.papers || [];
-  let paper = papers.find((p: any) => p.id === resolvedParams.id);
-
-  if (!paper) {
-    const rawPaper = allResearch.find((r: any) => r.slug === resolvedParams.id || r._id?.toString() === resolvedParams.id);
-    if (rawPaper) {
-      paper = {
-        id: rawPaper.slug || rawPaper._id?.toString(),
-        title: rawPaper.title,
-        conference: rawPaper.tag || "AI Research Specification",
-        year: rawPaper.formattedPublishTime || rawPaper.date || "2026",
-        abstract: rawPaper.abstract || rawPaper.excerpt || "",
-        content: rawPaper.content || rawPaper.abstract || rawPaper.excerpt || "",
-        pdfUrl: "#",
-        tags: rawPaper.keywords || [],
-        coverImage: rawPaper.coverImage
-      };
-    }
-  }
+  const paper = findResearchById(allResearch, resolvedParams.id);
 
   if (!paper) {
     notFound();
