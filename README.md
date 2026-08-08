@@ -1,50 +1,44 @@
-# Modern Full-Stack AI Portfolio Site 🚀✨
+# Developer Portfolio
 
-> **Personal Developer Portfolio & AI Engineering Showcase**  
-> *Built with Next.js 15 App Router, React, Tailwind CSS, Framer Motion, MongoDB, Firebase Admin, Gemini AI, Mistral API, Tavily Web Search, and Resume Analyzer.*
+Personal portfolio web application built with Next.js 15, React 19, and Tailwind CSS.
 
-[![Next.js](https://img.shields.io/badge/Next.js-15.0-000000?style=flat&logo=next.js&logoColor=white)](https://nextjs.org)
-[![React](https://img.shields.io/badge/React-19.0-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat&logo=mongodb&logoColor=white)](https://mongodb.com)
+## Features
 
----
+- Next.js 15 App Router: Uses server components, server actions, and API routes.
+- Gemini AI chat assistant: Embedded assistant that answers visitor questions about projects and tech stack.
+- Resume Analyzer: Parses resume text and calculates scoring based on formatting guidelines.
+- Tavily search integration: Connects to Tavily API for real-time web search capability.
+- Micro-animations: Page transitions built with Framer Motion and Tailwind CSS.
+- MongoDB database: Stores article data and research entries.
 
-## 💡 Highlights & Features
+## Tech Stack
 
-- ⚡ **Next.js 15 App Router & Server Actions**: Production performance with hybrid static rendering, server actions, and API route security.
-- 🤖 **Integrated Gemini AI Streaming Chat**: Custom AI assistant embedded into the portfolio to answer visitor questions about experience, projects, and tech stack.
-- 📄 **Smart Resume Analyzer Engine**: Evaluates resume markdown and provides algorithmic scoring based on ATS rules and software engineering guidelines.
-- 🌐 **Tavily AI Search & Scraper**: Real-time web intelligence and research integration powered by Tavily and Cheerio.
-- 🎨 **Glassmorphism & Micro-Animations**: Smooth visual transitions built with **Framer Motion** and Tailwind CSS design tokens.
+- Framework: Next.js 15, React 19
+- Styling: Tailwind CSS, Framer Motion
+- Database: MongoDB Atlas, Firebase Admin
+- APIs: Google Gemini API, Tavily API
 
----
+## Getting Started
 
-## 🚀 Getting Started
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/nabaraj-kc/portfolio.git
+   cd portfolio
+   ```
 
-### 1. Installation
-```bash
-git clone https://github.com/nabaraj-kc/portfolio.git
-cd portfolio
-npm install
-```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-### 2. Environment Configuration
-```bash
-cp .env.example .env.local
-# Fill in your local MongoDB URI, Gemini API key, etc.
-```
+3. Configure environment variables:
+   ```bash
+   cp .env.example .env.local
+   # Fill in your local MongoDB URI, Gemini API key, etc.
+   ```
 
-### 3. Run Development Server
-```bash
-npm run dev
-# Open http://localhost:3000
-```
-
----
-
-## 👨‍💻 Author
-
-**Nabaraj KC**  
-- GitHub: [@nabaraj-kc](https://github.com/nabaraj-kc)  
-- Website: [nabarajkc.com.np](https://nabarajkc.com.np)
+4. Run the development server:
+   ```bash
+   npm run dev
+   # Open http://localhost:3000
+   ```
