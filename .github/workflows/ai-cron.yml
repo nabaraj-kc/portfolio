@@ -1,4 +1,4 @@
-﻿name: Autonomous AI Daily Content Engine
+name: Autonomous AI Daily Content Engine
 
 on:
   schedule:
@@ -12,23 +12,32 @@ jobs:
     steps:
       - name: Trigger Autonomous AI Brain
         env:
-          CRON_SECRET: ${{ secrets.CRON_SECRET }}
-          API_URL: ${{ secrets.PRODUCTION_URL }}/api/admin/autonomous
+          RAW_PRODUCTION_URL: ${{ secrets.PRODUCTION_URL }}
+          RAW_CRON_SECRET: ${{ secrets.CRON_SECRET }}
         run: |
-          echo "Triggering Autonomous AI Content Engine..."
-          RESPONSE=$(curl -s -w "\nHTTP_STATUS:%{http_code}" -X GET "$API_URL" \
-            -H "Authorization: Bearer $CRON_SECRET" \
+          echo "Preparing Autonomous AI Content Engine Trigger..."
+          
+          # Fallback defaults if secrets are empty
+          BASE_URL="${RAW_PRODUCTION_URL:-https://nabarajkc.com.np}"
+          BASE_URL="${BASE_URL%/}"
+          SECRET="${RAW_CRON_SECRET:-nkc-cron-secret-2026}"
+          API_URL="${BASE_URL}/api/admin/autonomous"
+          
+          echo "Target API Endpoint: $API_URL"
+          
+          RESPONSE=$(curl -sSL -w "\nHTTP_STATUS:%{http_code}" -X GET "$API_URL" \
+            -H "Authorization: Bearer $SECRET" \
             --max-time 300)
           
           HTTP_STATUS=$(echo "$RESPONSE" | grep "HTTP_STATUS:" | cut -d ':' -f 2)
           BODY=$(echo "$RESPONSE" | sed -e 's/HTTP_STATUS\:.*//g')
           
-          echo "Status: $HTTP_STATUS"
-          echo "Response: $BODY"
+          echo "HTTP Status Code: $HTTP_STATUS"
+          echo "Response Body: $BODY"
           
           if [ "$HTTP_STATUS" -ne 200 ]; then
-            echo "AI content engine failed with status $HTTP_STATUS"
+            echo "::error::AI Content Engine failed with HTTP status $HTTP_STATUS"
             exit 1
           fi
-          echo "AI content engine completed successfully!"
-          echo "Generated: $(echo $BODY | python3 -c 'import sys,json; d=json.load(sys.stdin); print(f\"Article: {d.get(\"article\",{}).get(\"title\",\"N/A\")} | Research: {d.get(\"research\",{}).get(\"title\",\"N/A\")}\")')"
+          
+          echo "AI Content Engine completed successfully!"
