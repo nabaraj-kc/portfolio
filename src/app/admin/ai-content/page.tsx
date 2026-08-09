@@ -135,22 +135,23 @@ export default function AIContentPage() {
   async function runCronJobNow() {
     setGenerating(true);
     setGenLog([
-      "Triggering daily publish job via /api/cron/publish...",
-      "This bypasses the time-check and generates content immediately.",
+      "Triggering daily publish job via /api/admin/autonomous?async=true...",
+      "This bypasses the time-check and generates content in background.",
     ]);
     try {
       // Force-execute by calling the autonomous route directly (bypasses time window)
-      const res = await fetch("/api/admin/autonomous");
+      const res = await fetch("/api/admin/autonomous?async=true");
       const data = await res.json();
       if (data.success) {
         setGenLog(prev => [
           ...prev,
-          "✅ Daily publishing complete!",
-          "Article: " + (data.article?.title || "Generated"),
-          "Research Paper: " + (data.research?.title || "Generated"),
+          "✅ Daily publishing job triggered in background!",
+          "Generating 1 Article + 1 Research Paper...",
+          "Check back in 1–2 minutes for published content.",
         ]);
         setCronLastStatus("SUCCESS");
-        await refreshContent();
+        setTimeout(refreshContent, 5000);
+        setTimeout(refreshContent, 20000);
       } else {
         setGenLog(prev => [...prev, "❌ Failed: " + (data.error || JSON.stringify(data))]);
       }
@@ -168,18 +169,19 @@ export default function AIContentPage() {
       "Deep-researching live internet sources...",
     ]);
     try {
-      const res = await fetch("/api/admin/autonomous");
+      const res = await fetch("/api/admin/autonomous?async=true");
       const data = await res.json();
       if (data.success) {
         setGenLog(prev => [
           ...prev,
-          "Article generated: " + data.article?.title,
-          "Research paper generated: " + data.research?.title,
-          "Both published to database.",
+          "✅ Autonomous AI Content Engine launched successfully!",
+          "Generating 1 Article + 1 Research Paper in background...",
+          "Content will be published automatically upon completion (~1-2 min).",
         ]);
-        await refreshContent();
+        setTimeout(refreshContent, 5000);
+        setTimeout(refreshContent, 20000);
       } else {
-        setGenLog(prev => [...prev, "Error: " + data.error]);
+        setGenLog(prev => [...prev, "Error: " + (data.error || "Unauthorized access")]);
       }
     } catch {
       setGenLog(prev => [...prev, "Network error. Check console."]);

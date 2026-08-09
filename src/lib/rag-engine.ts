@@ -148,12 +148,53 @@ export async function discoverTrendingTopic(
   }
 
   if (allBatches.length === 0) {
+    const existingLower = (existingTitles || []).filter(Boolean).map((t) => String(t).toLowerCase());
+
+    const DYNAMIC_RESEARCH_SEEDS = [
+      "Sub-Network Entropy & Zero-Knowledge Proof Compression in Distributed Systems",
+      "Asymmetric Entanglement Dynamics in Superconducting Qubit Arrays",
+      "Neuromorphic Event-Based Sensing & Micro-Latency Perception Matrices",
+      "Hierarchical Vector Embedding Distillation for Multi-Modal LLMs",
+      "Autonomous Multi-Agent Consensus Mechanisms in High-Throughput DAGs",
+      "Self-Optimizing Compiler Targets for Edge WebAssembly Runtimes",
+      "Sparse Mixture-of-Experts Router Bottlenecks in Sub-Billion Parameter Models",
+      "Distributed Spatial Perception Graphs for Heterogeneous Drone Swarms",
+      "Memory-Safe Rust Kernel Interoperability in Low-Resource Microcontrollers",
+      "Post-Quantum Lattice-Based Cryptographic Primitives in Mesh Networks",
+    ];
+
+    const DYNAMIC_ARTICLE_SEEDS = [
+      "Architecting Production-Ready Multi-Agent Workflows in 2026",
+      "Why Vector Databases are Moving Beyond HNSW Indexing",
+      "Building Zero-Trust Edge API Gateways with WebAssembly Runtimes",
+      "Designing Low-Latency Reasoning Pipelines with DeepSeek R1 and Gemini Flash",
+      "How Modern Distributed Systems Handle Split-Brain Consensus Without Raft",
+      "Optimizing Context Window Caching for Multi-Turn Agent Applications",
+      "The Shift from Monolithic LLM Fine-Tuning to Dynamic LoRA Adapter Networks",
+      "Building Self-Healing Microservices with Autonomous AI Diagnostic Agents",
+      "How Graph Neural Networks are Revolutionizing Real-Time Fraud Detection",
+      "Modern Web Architecture: Combining Next.js Server Components with Edge Workers",
+    ];
+
+    const seedPool = target === "research" ? DYNAMIC_RESEARCH_SEEDS : DYNAMIC_ARTICLE_SEEDS;
+    
+    // Pick a topic seed that is NOT in existingTitles
+    let selectedTopic = seedPool[Math.floor(Math.random() * seedPool.length)];
+    for (const seed of seedPool) {
+      const isUsed = existingLower.some((e) => e.includes(seed.toLowerCase().slice(0, 15)));
+      if (!isUsed) {
+        selectedTopic = seed;
+        break;
+      }
+    }
+
+    if (existingLower.some((e) => e.includes(selectedTopic.toLowerCase().slice(0, 15)))) {
+      selectedTopic = `${selectedTopic} (${Date.now().toString().slice(-4)})`;
+    }
+
     return {
-      topic: target === "research"
-        ? "Quantum Machine Learning Architecture & Subatomic Entanglement Models 2026"
-        : "Advanced Autonomous Multi-Agent AI Systems 2026",
-      context:
-        "Multi-agent frameworks and quantum machine learning models are revolutionizing distributed artificial intelligence.",
+      topic: selectedTopic,
+      context: `Comprehensive analysis and implementation guidelines regarding ${selectedTopic}.`,
       sources: [],
     };
   }
@@ -186,9 +227,14 @@ export async function discoverTrendingTopic(
     }
   }
 
-  const topic =
+  let topic =
     chosenBatch.results[0]?.title ||
     chosenBatch.query.replace(/\d{4}/g, "").trim();
+
+  // Enforce strict uniqueness on final derived topic name
+  if (existingLower.some((e) => e.includes(topic.toLowerCase().slice(0, 20)))) {
+    topic = `${topic} — Novel Perspective (${new Date().getFullYear()})`;
+  }
 
   const context = chosenBatch.results
     .slice(0, 6)

@@ -253,7 +253,38 @@ export async function generateAndUploadCoverImage(
   const imagePrompt = buildTopicContextualPrompt(title, keywords, tag);
   console.log(`[Firebase Storage] Topic-matched image prompt: "${imagePrompt.slice(0, 100)}..."`);
 
-  // 1. Try Cloudflare AI
+  // 1. Try Hugging Face AI (Primary High-Quality Model)
+  const hfToken = process.env.HUGGINGFACE_API_TOKEN;
+  if (hfToken) {
+    try {
+      console.log("[Firebase Storage] Requesting Hugging Face AI (SDXL) image generation...");
+      const hfResponse = await fetch(
+        "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${hfToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ inputs: imagePrompt }),
+        }
+      );
+
+      if (hfResponse.ok) {
+        const imageBuffer = await hfResponse.arrayBuffer();
+        const destination = `${folder}/${slug}.jpg`;
+        const url = await uploadImageToFirebase(imageBuffer, destination, "image/jpeg");
+        console.log(`[Firebase Storage] Hugging Face AI topic cover uploaded: ${url}`);
+        return url;
+      } else {
+        console.warn(`[Firebase Storage] Hugging Face AI failed with status: ${hfResponse.status}`);
+      }
+    } catch (err: any) {
+      console.warn("[Firebase Storage] Hugging Face AI attempt failed:", err.message);
+    }
+  }
+
+  // 2. Try Cloudflare AI
   if (accountId && apiToken) {
     try {
       console.log("[Firebase Storage] Requesting Cloudflare AI SDXL Lightning generation...");
@@ -281,7 +312,7 @@ export async function generateAndUploadCoverImage(
     }
   }
 
-  // 2. Try Pollinations AI Engine
+  // 3. Try Pollinations AI Engine
   try {
     console.log("[Firebase Storage] Requesting Pollinations AI topic image generation...");
     const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(imagePrompt)}?width=1280&height=720&nologo=true`;

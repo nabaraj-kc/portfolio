@@ -203,12 +203,12 @@ export default function AIConfigAdminPage() {
                   onClick={async () => {
                     if (confirm("Are you sure you want to trigger the autonomous AI brain? This will generate and publish a new article immediately.")) {
                       try {
-                        const res = await fetch("/api/admin/autonomous");
+                        const res = await fetch("/api/admin/autonomous?async=true");
                         const data = await res.json();
                         if (data.success) {
-                          alert("Success! " + data.message + "\n\nTitle: " + data.article.title);
+                          alert("Success! " + data.message + "\n\nGenerating 1 Article + 1 Research Paper in background. Check back in 1–2 minutes!");
                         } else {
-                          alert("Error: " + data.error);
+                          alert("Error: " + (data.error || "Failed to trigger AI"));
                         }
                       } catch (e) {
                         alert("Failed to trigger autonomous AI");

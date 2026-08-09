@@ -17,15 +17,15 @@ jobs:
         run: |
           echo "Preparing Autonomous AI Content Engine Trigger..."
           
-          # Fallback defaults if secrets are empty
-          BASE_URL="${RAW_PRODUCTION_URL:-https://nabarajkc.com.np}"
+          # Fallback defaults if secrets are empty (use canonical www domain)
+          BASE_URL="${RAW_PRODUCTION_URL:-https://www.nabarajkc.com.np}"
           BASE_URL="${BASE_URL%/}"
           SECRET="${RAW_CRON_SECRET:-nkc-cron-secret-2026}"
-          API_URL="${BASE_URL}/api/admin/autonomous"
+          API_URL="${BASE_URL}/api/admin/autonomous?async=true"
           
           echo "Target API Endpoint: $API_URL"
           
-          RESPONSE=$(curl -sSL -w "\nHTTP_STATUS:%{http_code}" -X GET "$API_URL" \
+          RESPONSE=$(curl -sSL --location-trusted -w "\nHTTP_STATUS:%{http_code}" -X GET "$API_URL" \
             -H "Authorization: Bearer $SECRET" \
             --max-time 300)
           
