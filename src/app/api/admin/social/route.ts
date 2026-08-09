@@ -1,7 +1,18 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { getApiKey } from "@/lib/db/apikeys";
+import clientPromise from "@/lib/mongodb";
+
+async function getApiKey(name: string, envKey: string): Promise<string> {
+  try {
+    const client = await clientPromise;
+    const db = client.db();
+    const record = await db.collection("apikeys").findOne({ name });
+    return record?.value || process.env[envKey] || "";
+  } catch {
+    return process.env[envKey] || "";
+  }
+}
 
 async function isAuthorizedRequest(request: Request): Promise<boolean> {
   const authHeader = request.headers.get("authorization") || request.headers.get("Authorization") || "";
