@@ -22,6 +22,7 @@ const subdomainNavItems = [
 
 const aiNavItems = [
   { href: "/admin/ai-content", label: "AI Content Engine" },
+  { href: "/admin/social", label: "Social Media Engine" },
   { href: "/admin/users", label: "Users & Activities" },
   { href: "/admin/apikeys", label: "API Keys Manager" },
 ];
