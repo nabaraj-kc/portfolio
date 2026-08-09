@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "Research | Nabaraj KC | AI Operating Systems",
     description: "Research notes and system designs for the O AI operating system, Krrishmay multi-agent assistant, and hardware integration.",
     url: "https://research.nabarajkc.com.np",
-    siteName: "Nabaraj KC Research",
+    siteName: "Nabaraj KC",
     locale: "en_US",
     type: "website",
   },

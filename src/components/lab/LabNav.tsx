@@ -39,19 +39,22 @@ export default function LabNav() {
         {/* Left: Prominent Calligraphic Monogram Logo + /lab suffix */}
         <a
           href="/"
-          className="group flex items-center gap-2 transition-transform hover:scale-105 cursor-pointer"
+          className="group flex items-center gap-2.5 transition-all hover:opacity-90 cursor-pointer"
         >
-          <div className="relative h-10 w-28 sm:h-12 sm:w-36">
+          <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-[#C85A17]/30 bg-[#202020] shrink-0 shadow-sm transition-transform group-hover:scale-105">
             <Image
-              src="/images/logo-transparent.png"
-              alt="Nabaraj KC Logo"
+              src="/images/user-profile-transparent.png"
+              alt="Nabaraj KC"
               fill
-              className="object-contain object-left"
+              className="object-cover object-top scale-110"
               priority
               unoptimized
             />
           </div>
-          <span className="font-mono text-sm sm:text-base font-semibold text-[#8F8F8F] translate-y-0.5">/lab</span>
+          <span className="font-medium tracking-tight text-[#202020] text-sm sm:text-base font-sans">
+            Nabaraj <span className="text-[#C85A17] font-semibold">KC</span>
+          </span>
+          <span className="font-mono text-xs sm:text-sm font-semibold text-[#8F8F8F]">/lab</span>
         </a>
 
         {/* Center: Desktop Nav Links */}

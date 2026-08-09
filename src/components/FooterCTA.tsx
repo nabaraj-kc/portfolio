@@ -336,13 +336,13 @@ export default function FooterCTA() {
 
         {/* Small Footer Legal Row with Logo */}
         <div className="pt-8 border-t border-[#8F8F8F]/20 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#8F8F8F] gap-4">
-          <div className="flex items-center gap-4">
-            <div className="relative h-7 w-24">
+          <div className="flex items-center gap-3">
+            <div className="relative w-7 h-7 rounded-full overflow-hidden border border-[#C85A17]/30 bg-[#202020] shrink-0">
               <Image
-                src="/images/logo-transparent.png"
-                alt="Nabaraj KC Logo"
+                src="/images/user-profile-transparent.png"
+                alt="Nabaraj KC"
                 fill
-                className="object-contain object-left"
+                className="object-cover object-top scale-110"
                 unoptimized
               />
             </div>

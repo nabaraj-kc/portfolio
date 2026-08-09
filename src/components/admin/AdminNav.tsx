@@ -43,15 +43,18 @@ export default function AdminNav() {
       {/* Brand */}
       <div className="px-6 py-6 border-b border-white/10">
         <Link href="/admin/dashboard" className="flex items-center gap-3 group">
-          <div className="relative h-10 w-32">
+          <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#C85A17]/40 bg-[#1A1A1A] shrink-0 transition-transform group-hover:scale-105">
             <Image
-              src="/images/logo-transparent.png"
+              src="/images/user-profile-transparent.png"
               alt="Nabaraj KC"
               fill
-              className="object-contain object-left invert"
+              className="object-cover object-top scale-110"
               unoptimized
             />
           </div>
+          <span className="font-medium tracking-tight text-white text-base font-sans">
+            Nabaraj <span className="text-[#C85A17] font-semibold">KC</span>
+          </span>
         </Link>
         <p className="mt-2 font-mono text-[10px] text-white/40 uppercase tracking-widest">
           Central Admin Panel

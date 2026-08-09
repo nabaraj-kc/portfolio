@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     description:
       "Explore research papers, AI lab instruments, articles, and intelligent systems developed by Nabaraj KC.",
     url: BASE_URL,
-    siteName: "Nabaraj KC — Personal Engineering Platform",
+    siteName: "Nabaraj KC",
     images: [
       {
         url: `${BASE_URL}/images/user-profile-transparent.png`,
@@ -125,6 +125,13 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Nabaraj KC",
+    "alternateName": [
+      "Nabaraj KC",
+      "Nabaraj KC Portfolio",
+      "Nabaraj KC Articles",
+      "Nabaraj KC Research",
+      "Nabaraj KC AI"
+    ],
     "url": BASE_URL,
     "publisher": {
       "@type": "Person",

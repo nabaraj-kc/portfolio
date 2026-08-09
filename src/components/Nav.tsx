@@ -78,18 +78,21 @@ export default function Nav() {
               window.location.href = "/";
             }
           }}
-          className="group flex items-center gap-3 transition-transform hover:scale-105 cursor-pointer"
+          className="group flex items-center gap-3 transition-all hover:opacity-90 cursor-pointer"
         >
-          <div className="relative h-14 sm:h-16 w-36 sm:w-48 py-1">
+          <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-[#C85A17]/30 bg-[#202020] shrink-0 shadow-sm transition-transform group-hover:scale-105">
             <Image
-              src="/images/logo-transparent.png"
-              alt="Nabaraj KC Logo"
+              src="/images/user-profile-transparent.png"
+              alt="Nabaraj KC"
               fill
-              className="object-contain object-left scale-110"
+              className="object-cover object-top scale-110"
               priority
               unoptimized
             />
           </div>
+          <span className="font-medium tracking-tight text-[#202020] text-base sm:text-lg font-sans">
+            Nabaraj <span className="text-[#C85A17] font-semibold">KC</span>
+          </span>
         </a>
 
         {/* Center: Desktop Nav Links */}

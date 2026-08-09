@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "Articles | Nabaraj KC | Software & AI Engineering",
     description: "Technical articles and deep-dives on AI operating systems, multi-agent architecture, PyTorch, and computer vision.",
     url: "https://articles.nabarajkc.com.np",
-    siteName: "Nabaraj KC Articles",
+    siteName: "Nabaraj KC",
     locale: "en_US",
     type: "website",
   },
