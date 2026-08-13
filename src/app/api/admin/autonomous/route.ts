@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { cookies } from "next/headers";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import clientPromise from "@/lib/mongodb";
@@ -11,6 +11,9 @@ import {
   getAutonomousWriterPrompt,
   getAutonomousEditorPrompt,
 } from "@/lib/ai-prompts";
+
+export const maxDuration = 60; // Set maximum duration for Vercel serverless execution
+export const dynamic = "force-dynamic";
 
 // ============================================================
 // LLM PROVIDER — Gemini → OpenRouter (DeepSeek R1) → Mistral
@@ -713,15 +716,22 @@ export async function GET(request: Request) {
     const isAsync = url.searchParams.get("async") === "true";
 
     if (isAsync) {
-      // Non-blocking trigger mode for cron / background workers to avoid Cloudflare 524 timeouts
-      console.log("[Autonomous] Triggering pipeline asynchronously in background...");
-      runAutonomousPipeline().catch(err => {
-        console.error("[Autonomous Background Execution Error]:", err);
+      // Non-blocking trigger mode — uses Next.js after() to keep Vercel process alive until completion
+      console.log("[Autonomous] Scheduling pipeline execution via Next.js after()...");
+      
+      after(async () => {
+        try {
+          console.log("[Autonomous Background Task] Starting pipeline execution...");
+          await runAutonomousPipeline();
+          console.log("[Autonomous Background Task] Successfully finished pipeline & sent email!");
+        } catch (err) {
+          console.error("[Autonomous Background Task Failure]:", err);
+        }
       });
 
       return NextResponse.json({
         success: true,
-        message: "Autonomous AI Content Engine execution started in background.",
+        message: "Autonomous AI Content Engine execution started in background via Next.js after().",
         mode: "async",
         timestamp: new Date().toISOString(),
       });
